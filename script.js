@@ -20,14 +20,12 @@ const mouse = new THREE.Vector2();
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshLambertMaterial({color:0xF7F7F7});
 
-meshX = -10;
 for(let i = 0; i < 20; i++) {
     const mesh = new THREE.Mesh(geometry, material);
     mesh.position.x = (Math.random() - 0.5) * 10;
     mesh.position.y = (Math.random() - 0.5) * 10;
     mesh.position.z = (Math.random() - 0.5) * 10;
     scene.add(mesh);
-    meshX += 1;
 }
 
 
