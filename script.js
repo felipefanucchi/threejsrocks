@@ -18,8 +18,6 @@ const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshLambertMaterial({color:0xFFCC00});
 const mesh = new THREE.Mesh(geometry, material);
 
-mesh.rotation.set(45, 0, 0);
-mesh.scale.set(1, 2, 1);
 
 scene.add(mesh);
 
@@ -29,6 +27,13 @@ scene.add(light);
 
 const render = () => {
     requestAnimationFrame(render);
+
     renderer.render(scene, camera);
 }
 render();
+
+this.tl = new TimelineMax({paused: true});
+this.tl.to(mesh.scale, 1, {x: 2, ease: Expo.easeOut})
+this.tl.to(mesh.scale, .5, {x: .5, ease: Expo.easeOut})
+this.tl.to(mesh.position, .5, {x: 2, ease: Expo.easeOut})
+this.tl.to(mesh.rotation, .5, {y: Math.PI * .5, ease: Expo.easeOut}, "=-1.5")
