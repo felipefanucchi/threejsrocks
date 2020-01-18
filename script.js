@@ -18,7 +18,7 @@ const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
 const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshLambertMaterial({color:0xFFCC00});
+const material = new THREE.MeshLambertMaterial({color:0xF7F7F7});
 // 
 
 // scene.add(mesh);
@@ -35,8 +35,12 @@ for(let i = 0; i < 20; i++) {
 
 
 const light = new THREE.PointLight(0xFFFFFF, 1, 1000);
-light.position.set(10, 0, 25);
+light.position.set(0, 0, 0);
 scene.add(light);
+
+const light2 = new THREE.PointLight(0xFFFFFF, 2, 1000);
+light2.position.set(0, 0, 25);
+scene.add(light2);
 
 const render = () => {
     requestAnimationFrame(render);
