@@ -19,9 +19,6 @@ const mouse = new THREE.Vector2();
 
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshLambertMaterial({color:0xF7F7F7});
-// 
-
-// scene.add(mesh);
 
 meshX = -10;
 for(let i = 0; i < 20; i++) {
