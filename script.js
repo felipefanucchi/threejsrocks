@@ -14,14 +14,21 @@ window.addEventListener('resize', () => {
     camera.updateProjectionMatrix();
 });
 
-const geometry = new THREE.SphereGeometry(1, 10, 10);
+const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshLambertMaterial({color:0xFFCC00});
 const mesh = new THREE.Mesh(geometry, material);
 
+mesh.rotation.set(45, 0, 0);
+mesh.scale.set(1, 2, 1);
+
 scene.add(mesh);
 
-const light = new THREE.PointLight(0xFFFFFF, 1, 500);
+const light = new THREE.PointLight(0xFFFFFF, 1, 1000);
 light.position.set(10, 0, 25);
 scene.add(light);
 
-renderer.render(scene, camera);
+const render = () => {
+    requestAnimationFrame(render);
+    renderer.render(scene, camera);
+}
+render();
