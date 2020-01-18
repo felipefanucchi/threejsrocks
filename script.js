@@ -56,8 +56,6 @@ function onMouseClick(event) {
 
     raycaster.setFromCamera(mouse, camera);
 
-    console.log(this);
-
     const intersects = raycaster.intersectObjects(scene.children, true);
     for (let i = 0; i < intersects.length; i++) {
         this.tl = new TimelineMax();
