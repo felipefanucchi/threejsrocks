@@ -5,3 +5,12 @@ renderer.setClearColor("#e5e5e5");
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 document.body.appendChild(renderer.domElement);
+
+window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+
+    camera.updateProjectMatrix();
+});
+
+renderer.render(scene, camera);
