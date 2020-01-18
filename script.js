@@ -14,12 +14,25 @@ window.addEventListener('resize', () => {
     camera.updateProjectionMatrix();
 });
 
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshLambertMaterial({color:0xFFCC00});
-const mesh = new THREE.Mesh(geometry, material);
+// 
 
+// scene.add(mesh);
 
-scene.add(mesh);
+meshX = -10;
+for(let i = 0; i < 20; i++) {
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.x = (Math.random() - 0.5) * 10;
+    mesh.position.y = (Math.random() - 0.5) * 10;
+    mesh.position.z = (Math.random() - 0.5) * 10;
+    scene.add(mesh);
+    meshX += 1;
+}
+
 
 const light = new THREE.PointLight(0xFFFFFF, 1, 1000);
 light.position.set(10, 0, 25);
@@ -30,10 +43,26 @@ const render = () => {
 
     renderer.render(scene, camera);
 }
+
+function onMouseClick(event) {
+    event.preventDefault();
+
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+
+    console.log(this);
+
+    const intersects = raycaster.intersectObjects(scene.children, true);
+    for (let i = 0; i < intersects.length; i++) {
+        this.tl = new TimelineMax();
+        this.tl.to(intersects[i].object.scale, 1, {x: 2, ease: Expo.easeOut})
+        this.tl.to(intersects[i].object.scale, .5, {x: .5, ease: Expo.easeOut})
+        this.tl.to(intersects[i].object.position, .5, {x: 2, ease: Expo.easeOut})
+        this.tl.to(intersects[i].object.rotation, .5, {y: Math.PI * .5, ease: Expo.easeOut}, "=-1.5")
+    }
+}
 render();
 
-this.tl = new TimelineMax({paused: true});
-this.tl.to(mesh.scale, 1, {x: 2, ease: Expo.easeOut})
-this.tl.to(mesh.scale, .5, {x: .5, ease: Expo.easeOut})
-this.tl.to(mesh.position, .5, {x: 2, ease: Expo.easeOut})
-this.tl.to(mesh.rotation, .5, {y: Math.PI * .5, ease: Expo.easeOut}, "=-1.5")
+window.addEventListener('click', onMouseClick);
